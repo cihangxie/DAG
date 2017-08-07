@@ -1,5 +1,5 @@
-# Dense Adversary Generation (DAG)
-DAG is an algorithm to find adversarial examples for semantic segmentation and object detection (https://arxiv.org/abs/1703.08603).
+#  Adversarial Examples for Semantic Segmentation and Object Detection 
+This repo privdes a simple algorithm, **Dense Adversary Generation (DAG)**, to find adversarial examples for semantic segmentation and object detection (https://arxiv.org/abs/1703.08603).
 
 
 ### generate_config.m
