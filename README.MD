@@ -16,7 +16,9 @@ The config arguments:
  
 ### demo.m
 
-A simple demo which computes the adversarial examples for object detection and semantic segmentation algorithms, the output includes: (1) visualization of segmentation or detection result of the adversarial example; (2) visualization of original image X, adversarial examples X + r, adversarial perturbation r.
+A simple demo which computes the adversarial examples for object detection and semantic segmentation algorithms, the output includes: 
+1. visualization of segmentation or detection result of the adversarial example; 
+2. visualization of original image `X`, adversarial examples `X + r`, adversarial perturbation `r`.
 
 
 ### Citing DAG
