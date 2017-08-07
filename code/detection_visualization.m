@@ -1,6 +1,4 @@
 function detection_visualization(y, boxes, net, config)
-%DETECTION_VISUALIZATION Summary of this function goes here
-%   Detailed explanation goes here
 
 try
     eval(config);

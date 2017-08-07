@@ -1,4 +1,5 @@
 function [target_area, res, seg_result] = forward_and_back_propogation_seg(y, seg_mask_target, net)
+
 seg_mask_target(seg_mask_target==0) = 1;
 
 %% this part is the forward propagation process

@@ -1,11 +1,10 @@
 % % ------------ This script is for generating adversarial examples for
+% segmentation and detection (https://arxiv.org/abs/1703.08603)
 
 clear
 close all;
 
 config ='generate_config';
-
-dbstop if error
 
 try
     eval(config);
@@ -22,14 +21,11 @@ caffe.set_device(0)
 caffe.reset_all();
 net = caffe.Net(net_model, net_weights, 'test');
 
-
-
+%% generating adversarial examples now
 fprintf('now generating adversarial examples for %s\n\n', model_select);
 
 % prepare image info
 image = imread(sprintf('../data/%s.jpg', im_name));
-
-
 
 if strfind(model_select, 'det')
     image = myresize(image, 600, 'short'); % for the detection network, input short size is 600
@@ -61,27 +57,28 @@ if strfind(model_select, 'det')
     mapping = generate_mapping(unique(gt(:,1))-1);
     mapping(mapping~=0) = mapping(mapping~=0) + 1;
     mapping = [1, mapping]; % leave background class untouched
-    [r, itr, status, box_num] = fooling_det_net(image, boxes, gt, net, mapping, config);
-    
+    [r, itr, status, box_num] = fooling_det_net(image, boxes, gt, net, mapping, config);    
     detection_visualization(image+r, boxes, net, config);
+    
 else if strfind(model_select, 'seg')
         % prepare segmentation data
         seg_mask_ori = imread(sprintf('../data/%s.png', im_name)); % object segmentation annotation
         seg_mask_ori(seg_mask_ori == 255) = 0; % ignore white space
         gt_idx = unique(seg_mask_ori);
         gt_idx(gt_idx == 0) = []; % ignore class background
-        [~, target_idx_candidate_shuffle] = generate_mapping(gt_idx);
-        
+        [~, target_idx_candidate_shuffle] = generate_mapping(gt_idx);        
         load(sprintf('../data/%s.mat', shape)); % load pre-defined mask
-
         mask(mask~=0) = target_idx_candidate_shuffle(mask(mask~=0)); % assign a random color
         [r, itr, status, box_num, seg_result] = fooling_seg_net(image, double(mask'), double(seg_mask_ori'), net, config);
         imshow(seg_result, colormap);
+        
     else
         error('this model type is not available in our setting')
+        
     end
 end
 
+%% show another visualization
 % restore the images to normal status
 image_fool = image + r;
 image_fool = permute(image_fool, [2,1,3]);
@@ -100,11 +97,4 @@ imagesc((image_fool)/255)
 subplot(1,3,3)
 imagesc(r)
 
-
 caffe.reset_all();
-
-
-
-
-
-

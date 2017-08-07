@@ -1,6 +1,6 @@
 function res = back_propogation_det(y, rois, box_label, net)
 
-% need to do several back-propogation
+% need to do several back-propogation on detection case
 obj_idx = unique(box_label(1,:));
 obj_idx(obj_idx==1) = [];
 res = zeros(size(y));
@@ -22,7 +22,7 @@ for i = 1:numel(obj_idx)
     input_blobs = cell(2, 1);
     input_blobs{1} = y;
     input_blobs{2} = rois(:, rois_idx);
-    net.forward(input_blobs); %do forward pass   
+    net.forward(input_blobs); %do forward pass
     
     % do back-propogation
     dzdy = zeros(net.blobs(net.blob_names{end}).shape, 'single');
@@ -33,7 +33,7 @@ for i = 1:numel(obj_idx)
     res_obj = net.backward({dzdy}); %do backward pass
     
     res = res + (res_fool{1} - res_obj{1});
-
+    
 end
 
 

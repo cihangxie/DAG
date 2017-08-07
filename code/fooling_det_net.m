@@ -1,6 +1,6 @@
 function [r, itr, status, box_num] = fooling_det_net(x, boxes, gt, net, mapping, config)
 
-try    
+try
     eval(config);
 catch
     keyboard;
@@ -22,10 +22,10 @@ box_label = assign_target_det(x, rois, gt, mapping, net); % generate qualified b
 box_num(itr+1) = sum(box_label(1,:) == box_label(3,:) & box_label(1,:) ~= 1);
 
 % first condition is that we need to transfer all related boxes into fooling target
-% while (any(box_label(2,:)== box_label(3,:))) && itr<MAX_ITER   
-while (sum(box_label(1,:) == box_label(3,:) & box_label(1,:) ~= 1)) && itr<MAX_ITER   
+% while (any(box_label(2,:)== box_label(3,:))) && itr<MAX_ITER
+while (sum(box_label(1,:) == box_label(3,:) & box_label(1,:) ~= 1)) && itr<MAX_ITER
     
-    itr = itr + 1;  
+    itr = itr + 1;
     
     fprintf('iteration number %d\n', itr);
     % do the back-propogation for the selected bbox candidates, know the direction to go
@@ -41,7 +41,7 @@ while (sum(box_label(1,:) == box_label(3,:) & box_label(1,:) ~= 1)) && itr<MAX_I
     % calculate the candidate for the next interation
     box_label = forward_propogation_det(x+r, rois, box_label, net); %generate qualified bbox for back-propagation (e.g., how many boxes are said it is a car)
     fprintf('remain %d boxes \n', sum(box_label(1,:) == box_label(3,:) & box_label(1,:) ~= 1));
-%   fprintf('remain %d boxes \n', sum(box_label(2,:) ~= box_label(3,:) & box_label(1,:) ~= 1));
+    %   fprintf('remain %d boxes \n', sum(box_label(2,:) ~= box_label(3,:) & box_label(1,:) ~= 1));
     box_num(itr+1) = sum(box_label(1,:) == box_label(3,:) & box_label(1,:) ~= 1);
     
 end

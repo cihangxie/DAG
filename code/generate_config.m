@@ -4,11 +4,11 @@ addpath('../data/');
 addpath('../functions/');
 load('pascal_seg_colormap.mat');
 load('legend_voc.mat');
+
 % model_select = 'seg_fcn_8s';
 model_select = 'seg_fcn_alexnet';
 % model_select = 'det_VGG';
 % model_select = 'det_ZF';
-
 
 if strfind(model_select, 'det')
     MAX_ITER = 150; % max iteration number for detection
@@ -44,10 +44,7 @@ if ~exist(net_weights, 'file')
     run ../fetch_data/fetch_all_models.m
 end
 
-% caffe basic setting, mean data, already in BRG
+%% caffe basic setting, mean data, already in BRG
 mean_data(:,:,1) = 103.9390;
 mean_data(:,:,2) = 116.7790;
 mean_data(:,:,3) = 123.6800;
-
-
-

@@ -17,9 +17,7 @@ movefile ./temp/output/faster_rcnn_final/faster_rcnn_VOC0712_vgg_16layers/detect
 movefile ./temp/output/faster_rcnn_final/faster_rcnn_VOC0712_ZF/detection_final  ../weight/detection_final_ZF
 fprintf('Detection Models Done.\n');
 
-
 rmdir('./temp/', 's');
-
 
 %% for segmentation files
 fprintf('Downloading fcn models...\n')

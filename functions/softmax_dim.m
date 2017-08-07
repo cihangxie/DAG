@@ -1,8 +1,5 @@
 function softmaxA = softmax_dim(A,dim)
 
-% softmax computes the softmax of the vectors of the matrix A, taken
-% along dimension dim.
-
 if nargin < 2, error('The dimension along which to do the softmax must be provided.'); end
 
 s = ones(1, ndims(A));
