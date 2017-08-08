@@ -1,6 +1,7 @@
 function res = back_propogation_det(y, rois, box_label, net)
+% do back-propoagation on qualified bbox
+% --------------------------------------
 
-% need to do several back-propogation on detection case
 obj_idx = unique(box_label(1,:));
 obj_idx(obj_idx==1) = [];
 res = zeros(size(y));

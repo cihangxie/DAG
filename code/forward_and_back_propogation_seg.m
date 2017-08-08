@@ -1,4 +1,6 @@
 function [target_area, res, seg_result] = forward_and_back_propogation_seg(y, seg_mask_target, net)
+% do forward and back-propogation on target pixels in segmentation
+% ----------------------------------------------------------------
 
 seg_mask_target(seg_mask_target==0) = 1;
 
@@ -30,9 +32,7 @@ else
     %% this part is for backpropogation process (only do this if there exist target pixels)
     % first consider the gradient to get the target
     dzdy_temp = zeros(net.blobs(net.blob_names{end}).shape, 'single');
-    
-    mask_predicition_target_fool = reshape(seg_mask_target, numel(seg_mask_target), 1); % know what we need to be
-    
+    mask_predicition_target_fool = reshape(seg_mask_target, numel(seg_mask_target), 1); 
     dzdy = reshape(dzdy_temp, numel(dzdy_temp), 1);
     
     position = ((mask_predicition_target_fool-1)*length(mask_predicition_target_fool))' + (1:length(mask_predicition_target_fool));
@@ -41,12 +41,10 @@ else
     
     dzdy = reshape(dzdy, size(out));
     res_fool = net.backward({dzdy}); %do backward pass
-    res_fool = res_fool{1};
+    res_fool = res_fool{1};   
     
-    
-    
-    %     % next consider prediciton part
-    mask_predicition = reshape(seg_result_target, numel(seg_result_target), 1); % this is what prediction said
+    % next consider prediciton part
+    mask_predicition = reshape(seg_result_target, numel(seg_result_target), 1); 
     dzdy = reshape(dzdy_temp, numel(dzdy_temp), 1);
     
     position = ((mask_predicition-1)*length(mask_predicition))' + (1:length(mask_predicition));

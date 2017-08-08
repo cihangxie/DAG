@@ -28,7 +28,8 @@ fprintf('now generating adversarial examples for %s\n\n', model_select);
 image = imread(sprintf('../data/%s.jpg', im_name));
 
 if strfind(model_select, 'det')
-    image = myresize(image, 600, 'short'); % for the detection network, input short size is 600
+    % for the detection network, input short size is 600
+    image = myresize(image, 600, 'short'); 
 end
 if size(image, 3) == 1
     image = cat(3, image, image, image);
@@ -43,11 +44,12 @@ image = permute(image, [2, 1, 3]);  % flip width and height
 if strfind(model_select, 'det')
     xml_info = VOCreadrecxml(sprintf('../data/%s.xml', im_name));
     annotation = xml_info.objects; % object detection annotation
-    ratio = 600/min(xml_info.imgsize(1:2));  % in the detection network, the default short size is 600
-    load(sprintf('../data/%s_box_3000_%s.mat', im_name, model_select)); % use nms = 0.9 in RPN and choose Top 3000 boxes
+    ratio = 600/min(xml_info.imgsize(1:2));  
+    % use nms = 0.9 in RPN and choose Top 3000 boxes
+    load(sprintf('../data/%s_box_3000_%s.mat', im_name, model_select)); 
     boxes = aboxes(:,1:4);
-    % extract gt
-    gt = zeros(numel(annotation), 5); % construct sturcture like [obj_index, bbox]
+    % extract gt, construct sturcture like [obj_index, bbox]
+    gt = zeros(numel(annotation), 5); 
     for j = 1:numel(annotation)
         obj_idx = strfind(legends, annotation(j).class);
         obj_idx = cellfun('isempty', obj_idx);
@@ -62,7 +64,7 @@ if strfind(model_select, 'det')
     
 else if strfind(model_select, 'seg')
         % prepare segmentation data
-        seg_mask_ori = imread(sprintf('../data/%s.png', im_name)); % object segmentation annotation
+        seg_mask_ori = imread(sprintf('../data/%s.png', im_name)); 
         seg_mask_ori(seg_mask_ori == 255) = 0; % ignore white space
         gt_idx = unique(seg_mask_ori);
         gt_idx(gt_idx == 0) = []; % ignore class background

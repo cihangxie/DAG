@@ -1,4 +1,6 @@
 function box_label = assign_target_det(y, rois, gt, mapping, net)
+% assign the adversarial target for each bbox
+% -------------------------------------------
 
 net.blobs('data').reshape([size(y),1])
 net.blobs('rois').reshape([size(rois)])
@@ -15,7 +17,8 @@ overlap_value = zeros(size(gt,1), size(rois,2));
 
 for i = 1:size(gt,1)
     overlap_value(i,:) = boxoverlap(gt(i,2:5), rois(2:end,:)');
-    assignment_temp(i,:) = (overlap_value(i,:) > 0.1) & (out(gt(i,1), :) > 0.1); % selecting positive targets
+    % selecting positive targets
+    assignment_temp(i,:) = (overlap_value(i,:) > 0.1) & (out(gt(i,1), :) > 0.1); 
 end
 
 % need to merge these indexes to a single row
@@ -29,7 +32,8 @@ if ~isempty(idx)
     end
 end
 
-box_label = zeros(3, size(rois,2)); % first is what is its original label, second is its transfer label
+% first is what is its original label, second is its transfer label
+box_label = zeros(3, size(rois,2)); 
 
 % first row the original label, second row show the target label, third row show current prediction label
 box_label(1, :) = gt(assignment,1);

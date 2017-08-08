@@ -1,4 +1,4 @@
-%% config files of the whole program
+%% config files of the demo.m
 
 addpath('../data/');
 addpath('../functions/');
@@ -16,7 +16,8 @@ if strfind(model_select, 'det')
 else
     MAX_ITER = 200; % max iteration number for segmentation
     im_name = '2011_003271';
-    shape = 'square'; % choose the geometric shape that you want, e.g. square, circle, strip
+    % choose the geometric shape that you want, e.g. square, circle, strip
+    shape = 'square';
 end
 
 step_length = 0.5; % the step length of back-propagation direction

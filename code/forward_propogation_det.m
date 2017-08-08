@@ -1,4 +1,6 @@
 function box_label = forward_propogation_det(y, rois, box_label, net)
+% do forward-propoagation on all pre-computed bbox
+% --------------------------------------
 
 net.blobs('data').reshape([size(y),1])
 net.blobs('rois').reshape([size(rois)])
@@ -24,7 +26,6 @@ if sum(strong_index == 1)
     bbox = bbox(nms_index, :);
     if any(bbox(:, end) < score_threshold)
         strong_position_ori = strong_position_ori(nms_index);
-        %         box_label(3,strong_position_ori) = box_label(1,strong_position_ori);
         idx = bbox(:,end)<score_threshold;
         box_label(3,strong_position_ori(idx)) = box_label(1,strong_position_ori(idx));
         

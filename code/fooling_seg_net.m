@@ -1,4 +1,6 @@
 function [r, itr, status, box_num, seg_result] = fooling_seg_net(x, seg_mask_target, seg_mask_ori, net, config)
+% process to generate adversarial examples in segmentation network
+% -------------------------------------------------------------
 
 try
     eval(config);
@@ -11,12 +13,12 @@ r = x * 0;
 itr = 0;
 
 % intilization of fooling target
-[pred_target, dr, seg_result] = forward_and_back_propogation_seg(x+r, seg_mask_target, net); %generate qualified bbox for back-propagation (e.g., how many boxes are said it is a car)
+[pred_target, dr, seg_result] = forward_and_back_propogation_seg(x+r, seg_mask_target, net); 
 box_num(itr+1) = pred_target;
 
 pred_target_ori = sum(sum(seg_mask_ori>0));
 
-while (pred_target > 0.01*pred_target_ori) && itr<MAX_ITER % do not need pred_target
+while (pred_target > 0.01*pred_target_ori) && itr<MAX_ITER 
     itr = itr + 1;
     sprintf('iteration number %d\n', itr)
     
@@ -28,7 +30,7 @@ while (pred_target > 0.01*pred_target_ori) && itr<MAX_ITER % do not need pred_ta
     fprintf('max value in the perturbation is %.2f\n', r_max);
     
     % calculate the candidate for the next interation
-    [pred_target, dr, seg_result] = forward_and_back_propogation_seg(x+r, seg_mask_target, net); %generate qualified bbox for back-propagation (e.g., how many boxes are said it is a car)
+    [pred_target, dr, seg_result] = forward_and_back_propogation_seg(x+r, seg_mask_target, net);
     fprintf('%d pixels remained\n', pred_target);
     box_num(itr+1) = pred_target;
 end

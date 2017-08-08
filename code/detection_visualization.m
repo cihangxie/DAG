@@ -1,4 +1,6 @@
 function detection_visualization(y, boxes, net, config)
+% visualize detection results of the adversarial examples
+% -------------------------------------------------------
 
 try
     eval(config);
