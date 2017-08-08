@@ -1,6 +1,7 @@
 function mkdir_if_missing( directory )
-%MKDIR_IF_MISSING: make 'directory' if it does not exists.
-%   Detailed explanation goes here
+% MKDIR_IF_MISSING: make 'directory' if it does not exists.
+% ---------------------------------------------------------
+
 if ~exist(directory, 'dir')
     mkdir(directory);
 end

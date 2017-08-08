@@ -1,4 +1,6 @@
 function softmaxA = softmax_dim(A,dim)
+% apply the softmax function to a matrxi in certain dimension
+% -----------------------------------------------------------
 
 if nargin < 2, error('The dimension along which to do the softmax must be provided.'); end
 

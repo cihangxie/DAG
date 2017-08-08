@@ -1,7 +1,6 @@
 function showboxes(im, boxes, legends, color_conf)
 % Draw bounding boxes on top of an image.
 %   showboxes(im, boxes)
-%
 % -------------------------------------------------------
 
 fix_width = 800;

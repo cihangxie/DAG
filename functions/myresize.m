@@ -1,6 +1,7 @@
 function out = myresize(img, dim, type)
-
 % resize to fixed dimension according to short side or long side
+% --------------------------------------------------------------
+
 if nargin < 3
     error('input not enough!');
 end
