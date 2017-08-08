@@ -91,7 +91,10 @@ image_fool = image_fool(:, :, [3,2,1]);
 r = permute(r, [2,1,3]);
 r = r(:, :, [3,2,1]);
 
-figure(2)
+fig = figure(2);
+scr_size = get(0,'screensize');
+set(fig,'pos',[scr_size(3)/2,scr_size(4)/2,900,250]);
+pbaspect([1,1,1])
 subplot(1,3,1)
 imagesc((image_fool - r)/255)
 subplot(1,3,2)
