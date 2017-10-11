@@ -28,7 +28,7 @@ If you find DAG useful in your research, please consider citing:
     @inproceedings{xie2017adversarial,
         title={Adversarial Examples for Semantic Segmentation and Object Detection},
         author={Xie, Cihang and Wang, Jianyu and Zhang, Zhishuai and Zhou, Yuyin and Xie, Lingxi and Yuille, Alan},
-        Booktitle={IEEE International Conference on Computer Vision},
+        Booktitle={International Conference on Computer Vision},
         year={2017},
         organization={IEEE}
     }
