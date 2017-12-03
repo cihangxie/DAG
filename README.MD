@@ -1,7 +1,11 @@
 #  Adversarial Examples for Semantic Segmentation and Object Detection 
-This repo privdes a simple algorithm, **Dense Adversary Generation (DAG)**, to find adversarial examples for semantic segmentation and object detection (https://arxiv.org/abs/1703.08603).
+This repo privdes a simple algorithm, **Dense Adversary Generation (DAG)**, to find adversarial examples for semantic segmentation and object detection (https://arxiv.org/abs/1703.08603). An adversarial example whihc let both the detection network and the segmentation network fail is shown below
 
-![Original Image](original.png) ![Original Image Detection](original_detection.png)  ![Original Image Segmentation](original_segmentation.png) 
+![Demo Image](demo_image.png)
+
+
+
+## Code
 
 ### generate_config.m
 
@@ -13,7 +17,6 @@ The config arguments:
 - `net_weight`: network weight
 - for segmentation
   - `shape`: the segmenation shape of the adversarial example: circle, diamond, strip.
-
  
 ### demo.m
 
@@ -22,7 +25,15 @@ A simple demo which computes the adversarial examples for object detection and s
 2. visualization of original image `X`, adversarial examples `X + r`, adversarial perturbation `r`.
 
 
-### Citing DAG
+
+## Software Requirements
+
+1. Caffe *should* use the version from Microsoft (https://github.com/Microsoft/caffe) which supports the roi_pooling_layer
+2. Caffe *must* be complied with 'matcaffe'
+
+
+
+## Citing DAG
 
 If you find DAG useful in your research, please consider citing:
 
@@ -33,11 +44,3 @@ If you find DAG useful in your research, please consider citing:
         year={2017},
         organization={IEEE}
     }
-
-
-### Requirements: software
-
-1. Caffe *should* use the version from Microsoft (https://github.com/Microsoft/caffe) which supports the roi_pooling_layer
-2. Caffe *must* be complied with 'matcaffe'
-
-
