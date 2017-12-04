@@ -1,5 +1,5 @@
 #  Adversarial Examples for Semantic Segmentation and Object Detection 
-This repo privdes a simple algorithm, **Dense Adversary Generation (DAG)**, to find adversarial examples for semantic segmentation and object detection (https://arxiv.org/abs/1703.08603). An adversarial example whihc let both the detection network and the segmentation network fail is shown below
+This repo privdes a simple algorithm, **Dense Adversary Generation (DAG)**, to find adversarial examples for semantic segmentation and object detection (https://arxiv.org/abs/1703.08603). An adversarial example which let **both** the detection network and the segmentation network fail is shown below：
 
 ![Demo Image](demo_image.png)
 
