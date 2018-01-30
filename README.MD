@@ -35,7 +35,7 @@ A simple demo which computes the adversarial examples for object detection and s
 
 ## Citing DAG
 
-If you find DAG useful in your research, please consider citing:
+If you find DAG is useful in your research, please consider citing:
 
     @inproceedings{xie2017adversarial,
         title={Adversarial Examples for Semantic Segmentation and Object Detection},
